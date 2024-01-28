@@ -1,0 +1,17 @@
+{
+  "type": "module",
+  "name": "yt-project",
+  "version": "1.0.0",
+  "description": "youtube data api-v3 and GPT3-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Priyanshu",
+  "license": "ISC",
+  "dependencies": {
+    "googleapis": "^131.0.0",
+    "mysql2": "^3.9.0",
+    "openai": "^4.26.0"
+  }
+}
