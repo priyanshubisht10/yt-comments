@@ -4,7 +4,7 @@ import OpenAI from "openai";
 
 const openai = new OpenAI({
   organization: "org-9vluaGtKaqSzgKaWYVPfGc6j",
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const HOST =
@@ -64,7 +64,7 @@ async function create({ singleStoreConnection, comment }) {
 
 // main();
 
-async function readN( singleStoreConnection ) {
+async function readN(singleStoreConnection) {
   const [rows] = await singleStoreConnection.execute("SELECT * FROM comments");
   return rows;
 }
@@ -105,6 +105,18 @@ async function updateDatabaseUsingGPT() {
       });
       console.log(completion.choices[0].text);
       console.log(completion);
+
+      if (completion.choices[0].text.trim() === "Yes") {
+        await singleStoreConnection.execute(
+          `UPDATE comments SET respond = 1 WHERE id = ${comments[i].id}`
+        );
+        console.log("database updated respond set to 1");
+      } else {
+        await singleStoreConnection.execute(
+          `UPDATE comments SET respond = 0 WHERE id = ${comments[i].id}`
+        );
+        console.log("database updated respond set to 0");
+      }
     }
 
     // console.log(`Inserted row id is: ${id}`);
